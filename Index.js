@@ -1,5 +1,6 @@
 const express = require("express");
 const usersRouter = require("./routes/user");
+const itemsRouters = require("./routes/items");
 const app = express();
 const PORT = 8000;
 app.use(express.static("public")); //to read the imag and the any file hin folder public
@@ -10,6 +11,11 @@ app.get("/health",(req,res)=>{
 })*/
 
 app.use("/users",usersRouter);
+app.use("/items",itemsRouters);
+
+
+
+
 //middelware function
 const valids=(req,res,next)=>
 {
