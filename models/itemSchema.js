@@ -10,4 +10,11 @@ const itemschema= new mongoose.Schema
     timestamps : true    //to add time the add the item
 }
 )
-module.exports =mongoose.model("Item",itemschema);
+//middelware
+itemschema.pre("save",function (next){
+  
+console.log("first test middelware")
+next();
+
+})
+module.exports =mongoose.model("Item",itemschema);                                                                       

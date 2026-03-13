@@ -5,7 +5,7 @@ const getallitem= async(req,res)=>
 {
     try
     {
-        const items= await Item.find();
+        const items= await Item.find();  // const items= await Item.find(isDeleted : true );  rrturn all item is deleted
         res.status(200).json({
             message: "All Item was finded",
             data: items
@@ -119,6 +119,28 @@ const deleteditem= async(req,res)=>
 
 }
 
+//soft deleted 
+const softdelete = async(req,res)=>{
+    try
+    {
+      const itemid = req.params.itemid;  
+       if(!itemid)
+        return res.status(400).json({message:"The ID is Required"})
+      await Item.updateOne(
+        {_id : itemid},
+        {isDeleted : true}
+      )
+      res.status(200).json({message:"done deleted"})
+
+    }catch(err){
+        res.status(500).json({
+            message:"Server Error"
+        })
+    }
+}
+
+
+
 //create new item 
 const createNewItem= async (req,res)=>
 { 
@@ -162,4 +184,5 @@ module.exports=
    getfiltersname,
    updateitem,
    deleteditem,
+   softdelete,
 }
