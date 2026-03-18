@@ -4,7 +4,6 @@ const usersRouter = require("./routes/user");
 const itemsRouters = require("./routes/items");
 require("./models/db");
 const app = express();
-const PORT = 8000;
 app.use(express.static("public")); //to read the imag and the any file hin folder public
 app.use(express.json());    //تحويل ال obj  الي json
 /*   مشان اتأكد انو باك عندي بشتغل 
@@ -44,6 +43,6 @@ app.get("/items/:name",valids,(req,res)=>{
 })
 
 
-app.listen(PORT, () => {
-console.log(`Server running at http://localhost:${PORT}`);
+app.listen(process.env.PORT, () => {
+console.log(`Server running at http://localhost:${process.env.PORT}`);
 });
